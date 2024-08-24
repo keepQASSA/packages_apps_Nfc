@@ -82,7 +82,11 @@ public class NativeNfcTag implements TagEndpoint {
 
         public PresenceCheckWatchdog(int presenceCheckDelay,
                                      @Nullable DeviceHost.TagDisconnectedCallback callback) {
+        if (presenceCheckDelay < 1000) {
+            watchdogTimeout = 1000;
+        } else {
             watchdogTimeout = presenceCheckDelay;
+        }
             tagDisconnectedCallback = callback;
         }
 
